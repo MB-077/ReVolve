@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     
     #OWN
     'seller',
-    'buyer'
+    'buyer',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

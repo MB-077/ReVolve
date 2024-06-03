@@ -1,0 +1,47 @@
+<!-- templates/product_api_form.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Product via API</title>
+    <script>
+        async function submitForm(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+
+            const response = await fetch('/products/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                alert('Product created successfully!');
+            } else {
+                alert('Error creating product');
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Create Product via API</h1>
+    <form onsubmit="submitForm(event)">
+        <label for="item_name">Item Name:</label>
+        <input type="text" id="item_name" name="item_name"><br><br>
+        <label for="item_material_type">Material Type:</label>
+        <input type="text" id="item_material_type" name="item_material_type"><br><br>
+        <label for="item_grade">Grade:</label>
+        <input type="text" id="item_grade" name="item_grade"><br><br>
+        <label for="item_condition">Condition:</label>
+        <input type="text" id="item_condition" name="item_condition"><br><br>
+        <label for="item_volume">Volume:</label>
+        <input type="number" id="item_volume" name="item_volume"><br><br>
+        <label for="item_cost">Cost:</label>
+        <input type="number" id="item_cost" name="item_cost"><br><br>
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>
