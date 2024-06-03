@@ -3,12 +3,20 @@ from django.shortcuts import render
 # Create your views here.
 
 from rest_framework import viewsets
-from .models import seller_product
-from .serializers import ProductSerializer
+from .models import *
+from .serializers import *
 
-class ProductViewSet(viewsets.ModelViewSet):
+class SellerViewSet(viewsets.ModelViewSet):
+    queryset = Seller.objects.all()
+    serializer_class = SellerSerializer
+
+class seller_productViewSet(viewsets.ModelViewSet):
     queryset = seller_product.objects.all()
-    serializer_class = ProductSerializer
+    serializer_class = seller_productSerializer
+
+class seller_cardViewSet(viewsets.ModelViewSet):
+    queryset = seller_card.objects.all()
+    serializer_class = seller_cardSerializer
     
     
 from django.shortcuts import render
