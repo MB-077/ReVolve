@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+.seller-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    padding: 20px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+.seller-card img {
+    max-width: 150px;
+    margin-right: 20px;
+}
+.seller-card h2 {
+    margin: 0 0 10px 0;
+    font-size: 24px;
+}
+.seller-card p {
+    margin: 5px 0;
+}
+.no-results {
+    text-align: center;
+    margin: 50px 0;
+}

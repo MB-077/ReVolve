@@ -56,10 +56,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'ReVolve.urls'
 
+import os
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'buyer', 'templates'),
+                 os.path.join(BASE_DIR, 'seller', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

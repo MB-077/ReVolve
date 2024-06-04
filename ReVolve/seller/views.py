@@ -22,4 +22,4 @@ class seller_cardViewSet(viewsets.ModelViewSet):
 from django.shortcuts import render
 
 def product_form_view(request):
-    return render(request, 'product_api_form.html')
+    return render(request, 'seller/index.html')

@@ -16,9 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from seller.views import product_form_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('seller.urls')),  # Include the seller app URLs here
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('', include('buyer.urls')),  
+    path('', include('seller.urls')),
 ]
