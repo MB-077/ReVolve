@@ -29,16 +29,23 @@ def save_buyer_need_from_llm(llm_output):
 
 
 
+# def display_matching_seller_cards(request, buyer_need_id):
+#     buyer_need_instance = get_object_or_404(buyer_need, id=buyer_need_id)
+    
+#     # # Debugging information to verify buyer_need_instance fields
+#     # print(f"Buyer Need ID: {buyer_need_instance.id}")
+#     # print(f"Item Name: {buyer_need_instance.item_name}")
+#     # print(f"Material Type: {buyer_need_instance.item_material_type}")
+#     # print(f"Grade: {buyer_need_instance.item_grade}")
+#     # print(f"Volume: {buyer_need_instance.item_volume}")
+    
+#     seller_cards = get_seller_cards_for_buyer_need(buyer_need_instance)
+    
+#     return render(request, 'buyer/display_seller_cards.html', {'seller_cards': seller_cards})
+
+
+
 def display_matching_seller_cards(request, buyer_need_id):
     buyer_need_instance = get_object_or_404(buyer_need, id=buyer_need_id)
-    
-    # # Debugging information to verify buyer_need_instance fields
-    # print(f"Buyer Need ID: {buyer_need_instance.id}")
-    # print(f"Item Name: {buyer_need_instance.item_name}")
-    # print(f"Material Type: {buyer_need_instance.item_material_type}")
-    # print(f"Grade: {buyer_need_instance.item_grade}")
-    # print(f"Volume: {buyer_need_instance.item_volume}")
-    
-    seller_cards = get_seller_cards_for_buyer_need(buyer_need_instance)
-    
-    return render(request, 'buyer/display_seller_cards.html', {'seller_cards': seller_cards})
+    matching_products = get_seller_cards_for_buyer_need(buyer_need_instance)
+    return render(request, 'buyer/display_seller_cards.html', {'matching_products': matching_products})

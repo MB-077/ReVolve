@@ -1,5 +1,5 @@
 from buyer.models import buyer_need
-from seller.models import seller_product, seller_card
+from seller.models import seller_product
 
 def find_matching_products(buyer_need_instance):
     # # Debugging information to verify buyer_need_instance fields
@@ -12,11 +12,11 @@ def find_matching_products(buyer_need_instance):
         item_name=buyer_need_instance.item_name,
         item_material_type=buyer_need_instance.item_material_type,
         item_grade=buyer_need_instance.item_grade,
-        item_volume__gte=buyer_need_instance.item_volume
     )
     return matching_products
 
 def get_seller_cards_for_buyer_need(buyer_need_instance):
     matching_products = find_matching_products(buyer_need_instance)
-    seller_cards = seller_card.objects.filter(product__in=matching_products)
-    return seller_cards
+    # seller_cards = seller_product.objects.filter(product__in=matching_products)
+    # return seller_cards
+    return matching_products

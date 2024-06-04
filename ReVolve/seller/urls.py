@@ -6,7 +6,6 @@ from .views import *
 router = DefaultRouter()
 router.register(r'sellers', SellerViewSet)
 router.register(r'seller_products', seller_productViewSet)
-router.register(r'seller_cards', seller_cardViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

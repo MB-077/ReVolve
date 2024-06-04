@@ -14,10 +14,6 @@ class seller_productViewSet(viewsets.ModelViewSet):
     queryset = seller_product.objects.all()
     serializer_class = seller_productSerializer
 
-class seller_cardViewSet(viewsets.ModelViewSet):
-    queryset = seller_card.objects.all()
-    serializer_class = seller_cardSerializer
-    
     
 from django.shortcuts import render
 

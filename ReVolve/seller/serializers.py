@@ -12,10 +12,3 @@ class SellerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Seller
         fields = '__all__'
-
-class seller_cardSerializer(serializers.ModelSerializer):
-    product = seller_productSerializer(read_only=True)
-
-    class Meta:
-        model = seller_card
-        fields = '__all__'
