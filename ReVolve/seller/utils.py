@@ -3,9 +3,9 @@ from seller.models import seller_product
 
 def find_matching_products(buyer_need_instance):
     # # Debugging information to verify buyer_need_instance fields
-    # print(f"Item Name: {buyer_need_instance.item_name}")
-    # print(f"Material Type: {buyer_need_instance.item_material_type}")
-    # print(f"Grade: {buyer_need_instance.item_grade}")
+    print(f"Item Name: {buyer_need_instance.item_name}")
+    print(f"Material Type: {buyer_need_instance.item_material_type}")
+    print(f"Grade: {buyer_need_instance.item_grade}")
     # print(f"Volume: {buyer_need_instance.item_volume}")
 
     matching_products = seller_product.objects.filter(
