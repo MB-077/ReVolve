@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
@@ -49,7 +49,7 @@ const Signup = () => {
           className="border p-2 mb-3 w-full"
           required
         />
-        {/* Add more input fields for additional information if needed */}
+        {/* Adb cxd more input fields for additional information if needed */}
         <button type="submit" className="bg-blue-500 text-white p-2 w-full rounded">Sign Up</button>
       </form>
     </div>
