@@ -14,9 +14,9 @@ Token_list,Label_list,Token_length,Label_length
 "('Stainless Steel', '304', 'Austenitic stainless steel', 'Kitchen appliances;Food processing equipment;Architectural trim')","('Metal', 'Grade', 'Description', 'Common Uses')",4,4
 "('Stainless Steel', '316', 'Austenitic stainless steel with molybdenum', 'Chemical processing equipment;Medical implants;Marine hardware', '20x10x5', 'sheet')","('Metal', 'Grade', 'Description', 'Common Uses', 'Dimensions', 'shape')",6,6
 "('Stainless Steel', '430', 'Ferritic stainless steel', 'Automotive trim;Dishwasher interiors;Indoor architectural features')","('Metal', 'Grade', 'Description', 'Common Uses')",4,4
-"('Titanium', 'Grade 1', 'Unalloyed titanium', 'Aircraft components;Orthopedic implants;Sporting goods')","('Metal', 'Grade', 'Description', 'Common Uses')",4,4
-"('Titanium', 'Grade 5', 'Titanium alloy (6% aluminum, 4% vanadium)', 'Aerospace components;Racing bikes;Dental implants')","('Metal', 'Grade', 'Description', 'Common Uses')",4,4
-"('Titanium', 'Grade 7', 'Titanium alloy (0.12% palladium)', 'Chemical processing equipment;Marine hardware;Heat exchangers')","('Metal', 'Grade', 'Description', 'Common Uses')",4,4
+"('Titanium', '1', 'Unalloyed titanium', 'Aircraft components;Orthopedic implants;Sporting goods')","('Metal', 'Grade', 'Description', 'Common Uses')",4,4
+"('Titanium', '5', 'Titanium alloy (6% aluminum, 4% vanadium)', 'Aerospace components;Racing bikes;Dental implants')","('Metal', 'Grade', 'Description', 'Common Uses')",4,4
+"('Titanium', '7', 'Titanium alloy (0.12% palladium)', 'Chemical processing equipment;Marine hardware;Heat exchangers')","('Metal', 'Grade', 'Description', 'Common Uses')",4,4
 "('Nickel', '200', 'Commercially pure nickel', 'Electroplating;Battery components;Chemical processing equipment')","('Metal', 'Grade', 'Description', 'Common Uses')",4,4
 "('Nickel', '201', 'Commercially pure nickel with low carbon', 'Electronic components;Resistance wire;Thermocouples')","('Metal', 'Grade', 'Description', 'Common Uses')",4,4
 "('Nickel', '400', 'Monel alloy (67% nickel, 28% copper)', 'Marine hardware;Oil and gas industry components;Valve trim')","('Metal', 'Grade', 'Description', 'Common Uses')",4,4

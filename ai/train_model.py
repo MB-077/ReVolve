@@ -5,7 +5,7 @@ from sklearn.preprocessing import LabelEncoder
 import joblib
 
 # Load the dataset from a CSV file
-df = pd.read_csv('dataset.csv')
+df = pd.read_csv('clean_tagged_data.csv')
 
 # Flatten the Token_list and Label_list
 tokens = []
