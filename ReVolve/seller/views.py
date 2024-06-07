@@ -19,3 +19,5 @@ from django.shortcuts import render
 
 def product_form_view(request):
     return render(request, 'seller/index.html')
+
+
