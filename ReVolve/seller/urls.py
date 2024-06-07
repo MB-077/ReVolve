@@ -9,6 +9,5 @@ router.register(r'seller_products', seller_productViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('form/', product_form_view, name='product_form'),
 ]
 

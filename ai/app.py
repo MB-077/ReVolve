@@ -16,7 +16,8 @@ def tag():
     y_pred = model.predict(X)
     labels = label_encoder.inverse_transform(y_pred)
     
-    result = {token: label for token, label in zip(tokens, labels)}
+    # result = {token: label for token, label in zip(tokens, labels)}
+    result = {label: token for token, label in zip(tokens, labels)}
     
     return jsonify(result)
 

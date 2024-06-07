@@ -65,7 +65,7 @@ def generate_data(num_samples):
             word.append(random.choice(random_words))
         # Combine material, grade, dimensions, and shape
         token = f"'{material}', '{grade}', '{num}','{width}x{length}x{thickness}', '{shape}'," + ', '.join(f"'{w}'" for w in word)
-        label = "'Metal', 'Grade', 'Quantity', 'Dimensions', 'Shape',"+ ', '.join("'O'" for _ in word)
+        label = "'item_material_type', 'item_grade', 'item_quantity', 'item_dimension', 'item_shape',"+ ', '.join("'O'" for _ in word)
         
         data.append((token, label))
     
