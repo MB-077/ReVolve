@@ -12,16 +12,14 @@ from seller.utils import find_matching_products
 import requests
 
 
-
 def prompt_to_data(prompt):
     post_data = {"prompt": prompt}
     try:
         response = requests.post('http://127.0.0.1:5000/tag', json=post_data)
         response.raise_for_status()
         decoded_content = response.json()
-        print(type(decoded_content))
-        print(decoded_content)
-        save_buyer_need_from_llm(decoded_content)
+        saving_data = save_buyer_need_from_llm(decoded_content)
+        return saving_data
     except requests.exceptions.RequestException as e:
         print(f"HTTP request failed: {e}")
     except ValueError as e:
@@ -38,15 +36,21 @@ def save_buyer_need_from_llm(content):
         item_shape=content['item_shape'],
     )
     buyer_need_instance.save()
+    return (buyer_need_instance)
 
 @api_view(['POST'])
 def get_matching_products(request):
     try:
         # Extract data from request
-        data = request.data
-        item_material_type = data.get('item_material_type')
-        item_grade = data.get('item_grade')
-
+        prompt = request.data.get('prompt')
+        if prompt:
+            buyer_need_instance = prompt_to_data(prompt)
+        else:
+            return Response({'error': 'No prompt provided'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        item_material_type = buyer_need_instance.item_material_type
+        item_grade = buyer_need_instance.item_grade
+        
         buyer_need_instance = buyer_need(
             item_material_type=item_material_type,
             item_grade=item_grade,
