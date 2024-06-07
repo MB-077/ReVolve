@@ -18,7 +18,8 @@ material_grades = {
 }
 
 # List of shapes
-shapes = ["bars", "billets", "plates", "sheet"]
+shapes = ["bar", "billet", "plate", "sheet", "bars", "billets", "plates", "sheets", "bloom", "blooms", "rod", "rods"]
+
 
 # Individual random words
 random_words = [
@@ -52,17 +53,19 @@ def generate_data(num_samples):
         shape = random.choice(shapes)
         
         # Randomly generate 3D dimensions
-        length = random.randint(1, 10000)
-        width = random.randint(1, 10000)
-        thickness = random.randint(1, 40)
+        length = random.randrange(1, 1000)
+        width = random.randrange(1, 1000)
+        thickness = random.randrange(1, 40)
         
+        
+        num = random.randint(1, 2000)
         word = []
         #Randomly generate words
         for i in range(random.randint(1, 150)):
             word.append(random.choice(random_words))
         # Combine material, grade, dimensions, and shape
-        token = f"'{material}', '{grade}', '{width}x{length}x{thickness}', '{shape}'," + ', '.join(f"'{w}'" for w in word)
-        label = "'Metal', 'Grade', 'Dimensions', 'Shape',"+ ', '.join("'O'" for _ in word)
+        token = f"'{material}', '{grade}', '{num}','{width}x{length}x{thickness}', '{shape}'," + ', '.join(f"'{w}'" for w in word)
+        label = "'Metal', 'Grade', 'Quantity', 'Dimensions', 'Shape',"+ ', '.join("'O'" for _ in word)
         
         data.append((token, label))
     
