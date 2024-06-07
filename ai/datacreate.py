@@ -13,7 +13,8 @@ material_grades = {
     "zinc": ["SHG", "HG", "LME"],
     "tin": ["99.9% pure", "99.85% pure", "99.7% pure"],
     "iron": ["cast iron", "wrought iron"],
-    "magnesium": ["AZ31", "AZ61", "AZ91"]
+    "magnesium": ["AZ31", "AZ61", "AZ91"],
+    "tungsten": ["grade1","grade2","grade5"]
 }
 
 # List of shapes
@@ -21,7 +22,7 @@ shapes = ["bars", "billets", "plates", "sheet"]
 
 # Individual random words
 random_words = [
-    "I", "want", "to", "buy", "Please", "provide", "Can", "you", "get", "me", 
+    "I", "i", "want", "to", "buy", "Please", "provide", "Can", "you", "get", "me", 
     "Looking", "for", "Interested", "in", "Need", "looking", "searching", 
     "seeking", "wishing", "requesting", "inquiring", "more", "extra", "additional",
     "additional", "another", "some", "few", "other", "different", "various", "many", 
@@ -37,7 +38,7 @@ random_words = [
     "your", "my", "is", "can", "could", "may", "might", "would", "shall",
     "should", "must", "ought", "sure", "definitely", "absolutely", "certainly", "indeed",
     "undoubtedly", "positively", "okay", "fine", "good", "great", "excellent", "wonderful",
-    "fantastic", "superb", "awesome", "terrific", "marvelous", "fabulous", "outstanding", "Grade" , "grade"
+    "fantastic", "superb", "awesome", "terrific", "marvelous", "fabulous", "outstanding", "Grade" , "grade", "please"
 ]
 
 # Function to generate random tokens and labels
@@ -57,7 +58,7 @@ def generate_data(num_samples):
         
         word = []
         #Randomly generate words
-        for i in range(random.randint(1, 100)):
+        for i in range(random.randint(1, 150)):
             word.append(random.choice(random_words))
         # Combine material, grade, dimensions, and shape
         token = f"'{material}', '{grade}', '{width}x{length}x{thickness}', '{shape}'," + ', '.join(f"'{w}'" for w in word)
@@ -68,7 +69,7 @@ def generate_data(num_samples):
     return data
 
 # Generate data
-num_samples = 10000
+num_samples = 5000
 data = generate_data(num_samples)
 
 # Write data to CSV file
