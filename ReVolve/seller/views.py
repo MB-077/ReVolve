@@ -5,6 +5,11 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from .models import *
 from .serializers import *
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from .models import seller_product
+from .serializers import seller_productSerializer
 
 class SellerViewSet(viewsets.ModelViewSet):
     queryset = Seller.objects.all()
@@ -13,11 +18,4 @@ class SellerViewSet(viewsets.ModelViewSet):
 class seller_productViewSet(viewsets.ModelViewSet):
     queryset = seller_product.objects.all()
     serializer_class = seller_productSerializer
-
-    
-from django.shortcuts import render
-
-def product_form_view(request):
-    return render(request, 'seller/index.html')
-
 

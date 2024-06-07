@@ -8,6 +8,7 @@ from .models import *
 
 class seller_productSerializer(serializers.ModelSerializer):
     seller_name = serializers.CharField(source='seller.seller_name', read_only=True)
+    item_picture = serializers.ImageField(use_url=True)
 
     class Meta:
         model = seller_product
