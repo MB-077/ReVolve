@@ -3,12 +3,11 @@ from django.shortcuts import render
 # Create your views here.
 
 from rest_framework import viewsets
-from .models import *
+from .models import seller_product, Seller
 from .serializers import *
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
-from .models import seller_product
 from .serializers import seller_productSerializer, UserSerializer
 from rest_framework.permissions import AllowAny
 from django.contrib.auth import authenticate
@@ -55,17 +54,18 @@ def create_seller_product(request):
 
     try:
         seller, created = Seller.objects.get_or_create(seller_name=seller_name)
+        if seller is None:
+            return Response({'error': 'Could not create or retrieve seller'}, status=status.HTTP_400_BAD_REQUEST)
     except Seller.DoesNotExist:
         return Response({'error': 'Invalid seller name'}, status=status.HTTP_400_BAD_REQUEST)
 
     # print(seller)
     data = request.data.copy()
     data['seller'] = seller.id  # Use seller's ID for the ForeignKey field
-    # print(data)
 
     serializer = seller_productSerializer(data=data)
     try:
-        if serializer.is_valid(raise_exception=True):
+        if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
     except IntegrityError as e:

@@ -15,3 +15,6 @@ class Migration(migrations.Migration):
             name='seller_id',
         ),
     ]
+
+
+

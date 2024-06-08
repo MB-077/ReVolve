@@ -23,3 +23,6 @@ class seller_product(models.Model):
   
   def __str__(self):
     return f"{self.item_id} --> {self.item_material_type} from {self.seller.seller_name}"
+
+
+

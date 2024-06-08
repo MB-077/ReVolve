@@ -8,7 +8,7 @@ class seller_productSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = seller_product
-        fields = ['item_id', 'item_material_type', 'item_grade', 'item_condition', 'item_weight', 'item_picture', 'seller_name']
+        fields = ['item_id', 'item_material_type', 'item_grade', 'item_condition', 'item_weight', 'item_picture', 'seller_name', 'seller']
 
 class SellerSerializer(serializers.ModelSerializer):
     products = seller_productSerializer(many=True, read_only=True)
