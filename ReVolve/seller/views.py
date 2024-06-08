@@ -1,7 +1,3 @@
-from django.shortcuts import render
-
-# Create your views here.
-
 from rest_framework import viewsets
 from .models import seller_product, Seller
 from .serializers import *
@@ -25,26 +21,6 @@ class seller_productViewSet(viewsets.ModelViewSet):
     serializer_class = seller_productSerializer
 
 
-# @api_view(['POST'])
-# @permission_classes([AllowAny])
-# @parser_classes([MultiPartParser, FormParser])
-# def create_seller_product(request):
-#     seller_name = request.data.get('seller_name')
-#     seller_id = Seller.objects.get(seller_name = seller_name).seller_id
-#     try:
-#         seller = Seller.objects.get(seller_id=seller_id)
-#     except Seller.DoesNotExist:
-#         return Response({'error': 'Invalid seller ID'}, status=status.HTTP_400_BAD_REQUEST)
-
-#     data = request.data.copy()
-#     data['seller'] = seller 
-
-#     serializer = seller_productSerializer(data=data)
-#     if serializer.is_valid():
-#         serializer.save()
-#         return Response(serializer.data, status=status.HTTP_201_CREATED)
-#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 @api_view(['POST'])
 @permission_classes([AllowAny])
 @parser_classes([MultiPartParser, FormParser])
@@ -67,7 +43,7 @@ def create_seller_product(request):
     try:
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(status=status.HTTP_200_OK)
     except IntegrityError as e:
         return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
