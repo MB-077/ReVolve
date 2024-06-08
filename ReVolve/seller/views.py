@@ -10,6 +10,11 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import seller_product
 from .serializers import seller_productSerializer, UserSerializer
+from rest_framework.permissions import AllowAny
+from django.contrib.auth import authenticate
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.decorators import api_view, parser_classes
+
 
 class SellerViewSet(viewsets.ModelViewSet):
     queryset = Seller.objects.all()
@@ -19,11 +24,25 @@ class seller_productViewSet(viewsets.ModelViewSet):
     queryset = seller_product.objects.all()
     serializer_class = seller_productSerializer
 
-# views.py
-from rest_framework.permissions import AllowAny, IsAuthenticated
-from rest_framework.authtoken.models import Token
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+@parser_classes([MultiPartParser, FormParser])
+def create_seller_product(request):
+    seller_id = request.data.get('seller_id')
+    try:
+        seller = Seller.objects.get(seller_id=seller_id)
+    except Seller.DoesNotExist:
+        return Response({'error': 'Invalid seller ID'}, status=status.HTTP_400_BAD_REQUEST)
+
+    data = request.data.copy()
+    data['seller'] = seller.id 
+
+    serializer = seller_productSerializer(data=data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -45,11 +64,13 @@ def login_view(request):
         return Response(status=status.HTTP_200_OK)
     else:
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+    
 
-@api_view(['POST'])
-def create_seller_product(request):
-    serializer = seller_productSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+@api_view(['GET'])
+def allseller_view(request):
+    try:
+        products = seller_product.objects.all()  # Query the database for all seller_product instances
+        serializer = seller_productSerializer(products, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)

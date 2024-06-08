@@ -1,11 +1,6 @@
 from rest_framework import serializers
 from .models import *
 from django.contrib.auth.models import User
-        
-# class seller_productSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = seller_product
-#         fields = '__all__'
 
 class seller_productSerializer(serializers.ModelSerializer):
     seller_name = serializers.CharField(source='seller.seller_name', read_only=True)
