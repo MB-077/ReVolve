@@ -14,6 +14,7 @@ from rest_framework.permissions import AllowAny
 from django.contrib.auth import authenticate
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.decorators import api_view, parser_classes
+from django.db import IntegrityError
 
 
 class SellerViewSet(viewsets.ModelViewSet):
@@ -25,24 +26,50 @@ class seller_productViewSet(viewsets.ModelViewSet):
     serializer_class = seller_productSerializer
 
 
+# @api_view(['POST'])
+# @permission_classes([AllowAny])
+# @parser_classes([MultiPartParser, FormParser])
+# def create_seller_product(request):
+#     seller_name = request.data.get('seller_name')
+#     seller_id = Seller.objects.get(seller_name = seller_name).seller_id
+#     try:
+#         seller = Seller.objects.get(seller_id=seller_id)
+#     except Seller.DoesNotExist:
+#         return Response({'error': 'Invalid seller ID'}, status=status.HTTP_400_BAD_REQUEST)
+
+#     data = request.data.copy()
+#     data['seller'] = seller 
+
+#     serializer = seller_productSerializer(data=data)
+#     if serializer.is_valid():
+#         serializer.save()
+#         return Response(serializer.data, status=status.HTTP_201_CREATED)
+#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 @api_view(['POST'])
 @permission_classes([AllowAny])
 @parser_classes([MultiPartParser, FormParser])
 def create_seller_product(request):
-    seller_id = request.data.get('seller_id')
-    try:
-        seller = Seller.objects.get(seller_id=seller_id)
-    except Seller.DoesNotExist:
-        return Response({'error': 'Invalid seller ID'}, status=status.HTTP_400_BAD_REQUEST)
+    seller_name = request.data.get('seller')
+    # print(seller_name)
 
+    try:
+        seller, created = Seller.objects.get_or_create(seller_name=seller_name)
+    except Seller.DoesNotExist:
+        return Response({'error': 'Invalid seller name'}, status=status.HTTP_400_BAD_REQUEST)
+
+    # print(seller)
     data = request.data.copy()
-    data['seller'] = seller.id 
+    data['seller'] = seller.id  # Use seller's ID for the ForeignKey field
+    # print(data)
 
     serializer = seller_productSerializer(data=data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    try:
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+    except IntegrityError as e:
+        return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
