@@ -41,7 +41,6 @@ def save_buyer_need_from_llm(content):
 @api_view(['POST'])
 def get_matching_products(request):
     try:
-        # Extract data from request
         prompt = request.data.get('prompt')
         if prompt:
             buyer_need_instance = prompt_to_data(prompt)
