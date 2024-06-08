@@ -9,5 +9,8 @@ router.register(r'seller_products', seller_productViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('login/', login_view),
+    path('logout/', logout_view),
+    path('signup/', signup),
 ]
 
