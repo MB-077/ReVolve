@@ -6,7 +6,6 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .models import buyer_need
-from seller.models import seller_product
 from seller.serializers import seller_productSerializer
 from seller.utils import find_matching_products
 import requests

@@ -77,3 +77,16 @@ def allseller_view(request):
         return Response(serializer.data, status=status.HTTP_200_OK)
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+@api_view(['POST'])
+def contact_for_product(request):
+    try:
+        item = seller_product.objects.get(item_id = request.data.get('item_id'))
+        seller = item.seller
+        serializer = SellerSerializer(seller)
+        data = {"seller_contact":serializer.data.get('seller_contact')}
+        return Response(data, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        

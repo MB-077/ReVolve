@@ -8,6 +8,7 @@ def upload_to(instance, filename):
 
 class Seller(models.Model):
   seller_name = models.CharField(max_length=200)
+  seller_contact = models.CharField(max_length=14, null=True)
 
   def __str__(self):
     return f"{self.id} --> {self.seller_name}"
