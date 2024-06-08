@@ -27,7 +27,7 @@ from django.contrib.auth import authenticate, login, logout
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
-def signup(request):
+def signup_view(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
         user = serializer.save()
