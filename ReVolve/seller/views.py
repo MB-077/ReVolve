@@ -42,18 +42,9 @@ def login_view(request):
     password = request.data.get('password')
     user = authenticate(username=username, password=password)
     if user:
-        login(request, user)
-        token, _ = Token.objects.get_or_create(user=user)
-        return Response({'token': token.key}, status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_200_OK)
     else:
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
-
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def logout_view(request):
-    request.user.auth_token.delete()
-    logout(request)
-    return Response({'message': 'Successfully logged out'}, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
 def create_seller_product(request):
