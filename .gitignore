@@ -1,8 +1,8 @@
 /vir_env
-# db.sqlite3
+db.sqlite3
 env/
-# ReVolve/seller/migrations/
+ReVolve/seller/migrations/
 ReVolve/buyer/__pycache__/
 ReVolve/seller/__pycache__/
-# ReVolve/buyer/migrations/
+ReVolve/buyer/migrations/
 ReVolve/ReVolve/__pycache__/
