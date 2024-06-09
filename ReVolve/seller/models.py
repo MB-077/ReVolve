@@ -7,11 +7,13 @@ def upload_to(instance, filename):
   return 'posts/{filename}'.format(filename=filename)
 
 class Seller(models.Model):
-  seller_name = models.CharField(max_length=200)
+  seller_company_name = models.CharField(max_length=200)
+  seller_username = models.CharField(max_length=200)
   seller_contact = models.CharField(max_length=14, null=True)
+  seller_email = models.EmailField(max_length=200, null=True)
 
   def __str__(self):
-    return f"{self.id} --> {self.seller_name}"
+    return f"{self.id} --> {self.seller_username}"
       
 class seller_product(models.Model):
   item_id = models.CharField(max_length=50)
@@ -23,7 +25,7 @@ class seller_product(models.Model):
   seller = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name='products')
   
   def __str__(self):
-    return f"{self.item_id} --> {self.item_material_type} from {self.seller.seller_name}"
+    return f"{self.item_id} --> {self.item_material_type} from {self.seller.seller_username}"
 
 
 

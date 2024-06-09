@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'seller',
     'buyer',
     'rest_framework',
+    'corsheaders',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -59,7 +60,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ALLOWED_ORIGINS = True
 
 ROOT_URLCONF = 'ReVolve.urls'
 
