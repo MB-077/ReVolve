@@ -26,16 +26,14 @@ class seller_productViewSet(viewsets.ModelViewSet):
 @parser_classes([MultiPartParser, FormParser])
 def create_seller_product(request):
     seller_username = request.data.get('seller')
-    # print(seller_name)
 
     try:
-        seller = Seller.objects.get(seller_username=seller_username)
+        seller = Seller.objects.get(user__username=seller_username)
         if seller is None:
             return Response({'error': 'Could not create or retrieve seller'}, status=status.HTTP_400_BAD_REQUEST)
     except Seller.DoesNotExist:
         return Response({'error': 'Invalid seller name'}, status=status.HTTP_400_BAD_REQUEST)
 
-    # print(seller)
     data = request.data.copy()
     data['seller'] = seller.id  # Use seller's ID for the ForeignKey field
 
@@ -72,7 +70,7 @@ def login_view(request):
 @api_view(['GET'])
 def allseller_view(request):
     try:
-        products = seller_product.objects.all()  # Query the database for all seller_product instances
+        products = seller_product.objects.all()  
         serializer = seller_productSerializer(products, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     except Exception as e:
@@ -85,7 +83,8 @@ def contact_for_product(request):
         item = seller_product.objects.get(item_id = request.data.get('item_id'))
         seller = item.seller
         serializer = SellerSerializer(seller)
-        data = {"seller_contact":serializer.data.get('seller_contact'), "seller_email":serializer.data.get('seller_email')}
+        data = {"seller_contact":serializer.data.get('seller_contact'), 
+                "seller_email":serializer.data.get('seller_email')}
         return Response(data, status=status.HTTP_200_OK)
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
