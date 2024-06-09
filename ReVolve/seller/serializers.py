@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import *
+from .models import Seller, seller_product
 from django.contrib.auth.models import User
 
 class seller_productSerializer(serializers.ModelSerializer):
